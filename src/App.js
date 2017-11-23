@@ -5,6 +5,9 @@
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import React, { Component } from 'react';
+import {Tabs, Tab} from 'material-ui/Tabs';
+import Home from './Home';
+import Report from './Report';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -16,7 +19,16 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <p>Hello Ducks!</p>
+        <Tabs>
+          <Tab label="home">
+            <Home />
+          </Tab>
+          <Tab label="report">
+            <Report />
+          </Tab>
+          <Tab label="list">
+          </Tab>
+        </Tabs>
       </MuiThemeProvider>
     );
   }
