@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sightings from './Sightings';
 
 class List extends Component {
   render() {
@@ -8,6 +9,7 @@ class List extends Component {
         <p>
           Here you can list a duck sighting.
         </p>
+        <Sightings />
       </div>
     );
   }
