@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sighting from './Sighting';
 
 class Sightings extends Component {
   constructor(props) {
@@ -25,7 +26,12 @@ class Sightings extends Component {
       <div>
         <ul>
           {this.state.sightings.map(sighting =>
-            <li key={sighting.id}>{sighting.species}</li>
+            <Sighting
+              key={sighting.id}
+              species={sighting.species}
+              description={sighting.description}
+              count={sighting.count}
+              dateTime={sighting.dateTime}/>
           )}
         </ul>
       </div>

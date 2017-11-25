@@ -5,9 +5,9 @@ class List extends Component {
   render() {
     return (
       <div>
-        <h2>List all duck sightings</h2>
+        <h2>All duck sightings</h2>
         <p>
-          Here you can list a duck sighting.
+          Here you can see a list of all the reported duck sightings.
         </p>
         <Sightings />
       </div>
