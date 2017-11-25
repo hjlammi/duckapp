@@ -6,6 +6,8 @@
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import Paper from 'material-ui/Paper';
+import AppBar from 'material-ui/AppBar';
 import { Redirect } from 'react-router-dom';
 import Home from './Home';
 import Report from './Report';
@@ -39,17 +41,27 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div>
+          <AppBar
+            title="DuckApp"
+
+          />
           <Tabs
             value={currentTab}
             onChange={this.onTabChange}>
             <Tab label="home" value="/home">
-              <Home />
+              <Paper>
+                <Home />
+              </Paper>
             </Tab>
             <Tab label="report" value="/report">
-              <Report />
+              <Paper>
+                <Report />
+              </Paper>
             </Tab>
             <Tab label="list" value="/list">
-              <List />
+              <Paper>
+                <List />
+              </Paper>
             </Tab>
           </Tabs>
         </div>
