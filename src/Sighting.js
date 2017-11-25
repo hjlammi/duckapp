@@ -6,6 +6,8 @@ import LesserScaup from './img/lesser_scaup.jpg'; // Image source: https://uploa
 import Canvasback from './img/canvasback.jpg'; // Image source: https://upload.wikimedia.org/wikipedia/commons/6/6a/Canvasback_pair2.jpg
 import Mallard from './img/mallard.jpg'; // Image source: https://upload.wikimedia.org/wikipedia/commons/b/bf/Anas_platyrhynchos_male_female_quadrat.jpg
 import RubberDuck from './img/duck.png'; // Image source: https://pixabay.com/en/duck-duckling-toy-rubber-baby-146967/
+import Subheader from 'material-ui/Subheader';
+import moment from 'moment';
 
 class Sighting extends Component {
   constructor(props) {
@@ -57,8 +59,10 @@ class Sighting extends Component {
             <img src={duckImg} alt=""/>
           </CardMedia>
           <CardText>
-          {this.state.description}
-          {this.state.dateTime}
+            <Subheader>Description of the sighting:</Subheader>
+            <p>{this.state.description}</p>
+            <Subheader>Date and time of the sighting:</Subheader>
+            <p>{moment(this.state.dateTime).format("Do MMM YYYY")} at {moment(this.state.dateTime).format("H:mm")}</p>
           </CardText>
         </Card>
       </div>
