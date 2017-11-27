@@ -5,6 +5,8 @@ import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 class Report extends Component {
   constructor(props) {
@@ -17,7 +19,8 @@ class Report extends Component {
       date: null,
       description: "",
       count: 0,
-      countError: ""
+      countError: "",
+      open: false
     }
   }
 
@@ -41,13 +44,13 @@ class Report extends Component {
 
   selectDate = (event, date) => {
     this.setState({
-      date: date.toISOString().split('T')[0]
+      date: date
     });
   }
 
   selectTime = (event, date) => {
     this.setState({
-      time: date.toISOString().split('T')[1]
+      time: date
     });
   }
 
@@ -76,21 +79,21 @@ class Report extends Component {
     } else {
       this.setState({
         countError: "",
-        count: parseInt(count)
+        count: parseInt(count, 10)
       });
     }
   }
 
-  onSubmit = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
-    const date = this.state.date;
-    const time = this.state.time;
+    const date = this.state.date.toISOString().split('T')[0];
+    const time = this.state.time.toISOString().split('T')[1];
     const dateTime = date + "T" + time;
 
     const requestBody = {
       species: this.state.speciesName,
-      description: this.state.description,
+      description: this.state.description.trim(),
       dateTime: dateTime,
       count: this.state.count
     };
@@ -104,19 +107,47 @@ class Report extends Component {
       })
     }).then(res => {
       console.log(res);
+    });
+
+    this.setState({
+      open: false
     })
+  }
+
+  closeDialog = (event) => {
+    this.setState({
+      open: false
+    });
+  }
+
+  openDialog = () => {
+    this.setState({
+      open: true
+    });
   }
 
   render() {
     let DateTimeFormat = global.Intl.DateTimeFormat;
-    console.log(this.state);
+
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.closeDialog}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        onClick={this.handleSubmit}
+      />
+    ];
+
     return (
       <div>
         <h2>Report a duck sighting</h2>
         <p>
           Have you caught sight of a duck? Here you can report your sighting.
         </p>
-        <form onSubmit={this.onSubmit}>
           <SelectField
             floatingLabelText="Duck species:"
             value={this.state.speciesIndex}
@@ -154,8 +185,19 @@ class Report extends Component {
             errorText={this.state.countError}
             onChange={this.checkCount} />
           <br />
-          <RaisedButton type="submit" label="Primary" primary={true} />
-        </form>
+          <RaisedButton
+            type="submit"
+            label="Primary"
+            primary={true}
+            onClick={this.openDialog} />
+          <Dialog
+            title="Alert"
+            actions={actions}
+            modal={true}
+            open={this.state.open}
+          >
+            Are you sure you want to send data?
+          </Dialog>
       </div>
     );
   }
