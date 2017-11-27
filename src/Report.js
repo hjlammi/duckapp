@@ -3,6 +3,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
+import TextField from 'material-ui/TextField';
 
 class Report extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class Report extends Component {
 
     this.state = {
       species: [],
-      value: null
+      value: null,
+      countError: ""
     }
   }
 
@@ -29,6 +31,26 @@ class Report extends Component {
     this.setState({
       value: value,
     });
+  }
+
+  checkCount = (event, count) => {
+    if (count === "") {
+      this.setState({
+        countError: ""
+      });
+    } else if (parseInt(count, 10) <= 0) {
+      this.setState({
+        countError: "The value must be at least 1"
+      });
+    } else if (!/^\d+$/.test(count)) {
+      this.setState({
+        countError: "Only numbers can be used"
+      });
+    } else {
+      this.setState({
+        countError: ""
+      })
+    }
   }
 
   render() {
@@ -67,6 +89,13 @@ class Report extends Component {
           format="24hr"
           floatingLabelText="Time of the sighting:"
         />
+        <TextField
+          floatingLabelText="Description:"
+          fullWidth={true} />
+        <TextField
+          floatingLabelText="Duck count:"
+          errorText={this.state.countError}
+          onChange={this.checkCount} />
       </div>
     );
   }
