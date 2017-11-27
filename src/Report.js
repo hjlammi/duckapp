@@ -11,7 +11,7 @@ class Report extends Component {
 
     this.state = {
       species: [],
-      value: null,
+      speciesIndex: null,
       countError: ""
     }
   }
@@ -27,9 +27,10 @@ class Report extends Component {
     });
   }
 
-  selectSpecies = (event, index, value) => {
+  selectSpecies = (event, index, speciesIndex) => {
+    console.log(index);
     this.setState({
-      value: value,
+      speciesIndex: index,
     });
   }
 
@@ -54,8 +55,8 @@ class Report extends Component {
   }
 
   render() {
-    let index = 1;
     let DateTimeFormat = global.Intl.DateTimeFormat;
+    console.log(this.state);
     return (
       <div>
         <h2>Report a duck sighting</h2>
@@ -64,11 +65,10 @@ class Report extends Component {
         </p>
         <SelectField
           floatingLabelText="Duck species:"
-          value={this.state.value}
+          value={this.state.speciesIndex}
           onChange={this.selectSpecies}
         >
-          {this.state.species.map(sp => {
-            index++;
+          {this.state.species.map((sp, index) => {
             return (
               <MenuItem
                 value={index}
