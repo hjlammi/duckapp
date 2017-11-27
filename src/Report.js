@@ -4,6 +4,7 @@ import MenuItem from 'material-ui/MenuItem';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Report extends Component {
   constructor(props) {
@@ -75,9 +76,35 @@ class Report extends Component {
     } else {
       this.setState({
         countError: "",
-        count: count
+        count: parseInt(count)
       });
     }
+  }
+
+  onSubmit = (event) => {
+    event.preventDefault();
+
+    const date = this.state.date;
+    const time = this.state.time;
+    const dateTime = date + "T" + time;
+
+    const requestBody = {
+      species: this.state.speciesName,
+      description: this.state.description,
+      dateTime: dateTime,
+      count: this.state.count
+    };
+
+    const address = "http://localhost:8081/sightings";
+    fetch(address, {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }).then(res => {
+      console.log(res);
+    })
   }
 
   render() {
@@ -89,42 +116,46 @@ class Report extends Component {
         <p>
           Have you caught sight of a duck? Here you can report your sighting.
         </p>
-        <SelectField
-          floatingLabelText="Duck species:"
-          value={this.state.speciesIndex}
-          onChange={this.selectSpecies}
-        >
-          {this.state.species.map((sp, index) => {
-            return (
-              <MenuItem
-                value={index}
-                key={sp.name}
-                primaryText={sp.name} />
-            )
-          })}
-        </SelectField>
-        <DatePicker
-          floatingLabelText="Date of the sighting:"
-          formatDate={new DateTimeFormat('en-GB', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-          }).format}
-          onChange={this.selectDate}
-        />
-        <TimePicker
-          format="24hr"
-          floatingLabelText="Time of the sighting:"
-          onChange={this.selectTime}
-        />
-        <TextField
-          floatingLabelText="Description:"
-          fullWidth={true}
-          onChange={this.updateDescription} />
-        <TextField
-          floatingLabelText="Duck count:"
-          errorText={this.state.countError}
-          onChange={this.checkCount} />
+        <form onSubmit={this.onSubmit}>
+          <SelectField
+            floatingLabelText="Duck species:"
+            value={this.state.speciesIndex}
+            onChange={this.selectSpecies}
+          >
+            {this.state.species.map((sp, index) => {
+              return (
+                <MenuItem
+                  value={index}
+                  key={sp.name}
+                  primaryText={sp.name} />
+              )
+            })}
+          </SelectField>
+          <DatePicker
+            floatingLabelText="Date of the sighting:"
+            formatDate={new DateTimeFormat('en-GB', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            }).format}
+            onChange={this.selectDate}
+          />
+          <TimePicker
+            format="24hr"
+            floatingLabelText="Time of the sighting:"
+            onChange={this.selectTime}
+          />
+          <TextField
+            floatingLabelText="Description:"
+            fullWidth={true}
+            onChange={this.updateDescription} />
+          <TextField
+            floatingLabelText="Duck count:"
+            errorText={this.state.countError}
+            onChange={this.checkCount} />
+          <br />
+          <RaisedButton type="submit" label="Primary" primary={true} />
+        </form>
       </div>
     );
   }
