@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import DatePicker from 'material-ui/DatePicker';
+import TimePicker from 'material-ui/TimePicker';
 
 class Report extends Component {
   constructor(props) {
@@ -31,6 +33,7 @@ class Report extends Component {
 
   render() {
     let index = 1;
+    let DateTimeFormat = global.Intl.DateTimeFormat;
     return (
       <div>
         <h2>Report a duck sighting</h2>
@@ -45,10 +48,25 @@ class Report extends Component {
           {this.state.species.map(sp => {
             index++;
             return (
-              <MenuItem value={index} key={sp.name} primaryText={sp.name} />
+              <MenuItem
+                value={index}
+                key={sp.name}
+                primaryText={sp.name} />
             )
           })}
         </SelectField>
+        <DatePicker
+          floatingLabelText="Date of the sighting:"
+          formatDate={new DateTimeFormat('en-GB', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          }).format}
+        />
+        <TimePicker
+          format="24hr"
+          floatingLabelText="Time of the sighting:"
+        />
       </div>
     );
   }
