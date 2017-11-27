@@ -12,6 +12,10 @@ class Report extends Component {
     this.state = {
       species: [],
       speciesIndex: null,
+      speciesName: "",
+      date: null,
+      description: "",
+      count: 0,
       countError: ""
     }
   }
@@ -28,29 +32,51 @@ class Report extends Component {
   }
 
   selectSpecies = (event, index, speciesIndex) => {
-    console.log(index);
     this.setState({
       speciesIndex: index,
+      speciesName: event.target.textContent
     });
+  }
+
+  selectDate = (event, date) => {
+    this.setState({
+      date: date.toISOString().split('T')[0]
+    });
+  }
+
+  selectTime = (event, date) => {
+    this.setState({
+      time: date.toISOString().split('T')[1]
+    });
+  }
+
+  updateDescription = (event, description) => {
+    this.setState({
+      description: description
+    })
   }
 
   checkCount = (event, count) => {
     if (count === "") {
       this.setState({
-        countError: ""
+        countError: "",
+        count: 0
       });
     } else if (parseInt(count, 10) <= 0) {
       this.setState({
-        countError: "The value must be at least 1"
+        countError: "The value must be at least 1",
+        count: 0
       });
     } else if (!/^\d+$/.test(count)) {
       this.setState({
-        countError: "Only numbers can be used"
+        countError: "Only numbers can be used",
+        count: 0
       });
     } else {
       this.setState({
-        countError: ""
-      })
+        countError: "",
+        count: count
+      });
     }
   }
 
@@ -84,14 +110,17 @@ class Report extends Component {
             month: 'long',
             year: 'numeric',
           }).format}
+          onChange={this.selectDate}
         />
         <TimePicker
           format="24hr"
           floatingLabelText="Time of the sighting:"
+          onChange={this.selectTime}
         />
         <TextField
           floatingLabelText="Description:"
-          fullWidth={true} />
+          fullWidth={true}
+          onChange={this.updateDescription} />
         <TextField
           floatingLabelText="Duck count:"
           errorText={this.state.countError}
