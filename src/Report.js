@@ -16,12 +16,14 @@ class Report extends Component {
       species: [],
       speciesIndex: null,
       speciesName: "",
-      date: "",
-      time: "",
+      date: null,
+      time: null,
       description: "",
-      count: 0,
+      count: "",
       countError: "",
       open: false,
+      errorOpen: false,
+      successOpen: false
     }
   }
 
@@ -65,17 +67,17 @@ class Report extends Component {
     if (count === "") {
       this.setState({
         countError: "",
-        count: 0
+        count: ""
       });
     } else if (parseInt(count, 10) <= 0) {
       this.setState({
         countError: "The value must be at least 1",
-        count: 0
+        count: ""
       });
     } else if (!/^\d+$/.test(count)) {
       this.setState({
         countError: "Only numbers can be used",
-        count: 0
+        count: ""
       });
     } else {
       this.setState({
@@ -107,7 +109,15 @@ class Report extends Component {
         'Content-Type': 'application/json'
       })
     }).then(res => {
-      console.log(res);
+      if (res.status >= 400 && res.status < 600) {
+        this.setState({
+          errorOpen: true
+        });
+      } else {
+        this.setState({
+          successOpen: true
+        });
+      }
     });
 
     this.setState({
@@ -127,6 +137,17 @@ class Report extends Component {
     });
   }
 
+  closeSuccessDialog = () => {
+    this.setState({
+      successOpen: false,
+      speciesIndex: null,
+      date: null,
+      time: null,
+      description: "",
+      count: "",
+    });
+  }
+
   render() {
     let DateTimeFormat = global.Intl.DateTimeFormat;
 
@@ -143,10 +164,9 @@ class Report extends Component {
       />
     ];
 
-
     let disabled;
-    if (this.state.description === "" || this.state.speciesName === "" || this.state.date === "" ||
-    this.state.description === "" || this.state.count === 0) {
+    if (this.state.description === "" || this.state.speciesName === "" || this.state.date === null ||
+    this.state.time === null || this.state.count === "") {
       disabled = true;
     } else {
       disabled = false;
@@ -180,24 +200,28 @@ class Report extends Component {
               year: 'numeric',
             }).format}
             onChange={this.selectDate}
+            value={this.state.date}
           />
           <TimePicker
             format="24hr"
             floatingLabelText="Time of the sighting:"
             onChange={this.selectTime}
+            value={this.state.time}
           />
           <TextField
             floatingLabelText="Description:"
             fullWidth={true}
-            onChange={this.updateDescription} />
+            onChange={this.updateDescription}
+            value={this.state.description} />
           <TextField
             floatingLabelText="Duck count:"
             errorText={this.state.countError}
-            onChange={this.checkCount} />
+            onChange={this.checkCount}
+            value={this.state.count} />
           <br />
           <RaisedButton
             type="submit"
-            label="Primary"
+            label="Submit"
             primary={true}
             onClick={this.openDialog}
             disabled={disabled} />
@@ -208,6 +232,34 @@ class Report extends Component {
             open={this.state.open}
           >
             Are you sure you want to send data?
+          </Dialog>
+          <Dialog
+            title="Something went wrong!"
+            actions={
+              <FlatButton
+              label="Ok"
+              primary={true}
+              onClick={() => this.setState({ errorOpen: false})}
+              />
+            }
+            modal={true}
+            open={this.state.errorOpen}
+          >
+            Unfortunately something went wrong and the data was not sent
+          </Dialog>
+          <Dialog
+            title="Success!"
+            actions={
+              <FlatButton
+              label="Ok"
+              primary={true}
+              onClick={this.closeSuccessDialog}
+              />
+            }
+            modal={true}
+            open={this.state.successOpen}
+          >
+            Data was sent succesfully!
           </Dialog>
       </div>
     );
