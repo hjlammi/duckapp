@@ -16,11 +16,12 @@ class Report extends Component {
       species: [],
       speciesIndex: null,
       speciesName: "",
-      date: null,
+      date: "",
+      time: "",
       description: "",
       count: 0,
       countError: "",
-      open: false
+      open: false,
     }
   }
 
@@ -38,7 +39,7 @@ class Report extends Component {
   selectSpecies = (event, index, speciesIndex) => {
     this.setState({
       speciesIndex: index,
-      speciesName: event.target.textContent
+      speciesName: event.target.textContent,
     });
   }
 
@@ -57,7 +58,7 @@ class Report extends Component {
   updateDescription = (event, description) => {
     this.setState({
       description: description
-    })
+    });
   }
 
   checkCount = (event, count) => {
@@ -142,6 +143,15 @@ class Report extends Component {
       />
     ];
 
+
+    let disabled;
+    if (this.state.description === "" || this.state.speciesName === "" || this.state.date === "" ||
+    this.state.description === "" || this.state.count === 0) {
+      disabled = true;
+    } else {
+      disabled = false;
+    }
+
     return (
       <div>
         <h2>Report a duck sighting</h2>
@@ -189,7 +199,8 @@ class Report extends Component {
             type="submit"
             label="Primary"
             primary={true}
-            onClick={this.openDialog} />
+            onClick={this.openDialog}
+            disabled={disabled} />
           <Dialog
             title="Alert"
             actions={actions}
