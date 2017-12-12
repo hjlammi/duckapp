@@ -14,6 +14,7 @@ import Report from './Report';
 import List from './List';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Duck from './img/duck.png';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -43,7 +44,14 @@ class App extends Component {
         <div>
           <AppBar
             title="DuckApp"
-
+            iconElementLeft={
+               <img
+               src={Duck}
+               style={{
+                  width: "50px",
+                  display: "inline-block"
+                  }}
+               />}
           />
           <Tabs
             value={currentTab}
