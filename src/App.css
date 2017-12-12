@@ -30,6 +30,10 @@ p {
   margin: 0 0 15px;
 }
 
+.link:hover {
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
