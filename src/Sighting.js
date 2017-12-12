@@ -48,20 +48,26 @@ class Sighting extends Component {
       duckImg = RubberDuck;
     }
 
+    const subheaderStyle = {
+      padding: "0",
+      lineHeight: "36px"
+    }
+
     return (
       <div>
-        <Card style={{margin: "20px"}}>
+        <Card style={{marginBottom: "10px"}}>
           <CardMedia
             overlay={<CardTitle
+                      className="cardTitle"
                       title={this.state.species}
                       subtitle={"Count: " + this.state.count + " duck" + ((this.state.count === 1) ? "" : "s")} />}
           >
             <img src={duckImg} alt=""/>
           </CardMedia>
           <CardText>
-            <Subheader>Description of the sighting:</Subheader>
+            <Subheader style={subheaderStyle}>Description of the sighting:</Subheader>
             <p>{this.state.description}</p>
-            <Subheader>Date and time of the sighting:</Subheader>
+            <Subheader style={subheaderStyle}>Date and time of the sighting:</Subheader>
             <p>{moment(this.state.dateTime).format("Do MMM YYYY")} at {moment(this.state.dateTime).format("H:mm")}</p>
           </CardText>
         </Card>

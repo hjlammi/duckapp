@@ -69,7 +69,7 @@ class Sightings extends Component {
   render() {
     return (
       <div>
-        <Subheader>Order duck sightings:</Subheader>
+        <Subheader style={{padding: "0", lineHeight: "36px"}}>Order duck sightings:</Subheader>
         <DropDownMenu value={this.state.value} onChange={this.sortSightings}>
           <MenuItem value={1} primaryText=""/>
           <MenuItem value={2} primaryText="in alphabetical order"/>

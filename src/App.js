@@ -41,7 +41,7 @@ class App extends Component {
     }
 
     const paperStyle = {
-      width: "80%",
+      maxWidth: "800px",
       margin: "0 auto",
       minWidth: "300px",
       padding: "10px"
@@ -66,8 +66,8 @@ class App extends Component {
             value={currentTab}
             onChange={this.onTabChange}>
             <Tab label="home" value="/home">
-              <div className="paper">
-                <Paper style={paperStyle}>
+              <div>
+                <Paper style={paperStyle} className="paper">
                   <Home />
                 </Paper>
               </div>
