@@ -176,7 +176,7 @@ class Report extends Component {
       <div>
         <h2>Report a duck sighting</h2>
         <p>
-          Have you caught sight of a duck? Here you can report your sighting.
+          Have you caught sight of a duck? We'd love to hear about it! Here you can report your sighting.
         </p>
           <SelectField
             floatingLabelText="Duck species:"

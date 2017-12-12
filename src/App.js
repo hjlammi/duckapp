@@ -12,6 +12,7 @@ import { Redirect } from 'react-router-dom';
 import Home from './Home';
 import Report from './Report';
 import List from './List';
+import Sightings from './Sightings';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Duck from './img/duck.png';
@@ -39,35 +40,45 @@ class App extends Component {
       )
     }
 
+    const paperStyle = {
+      width: "80%",
+      margin: "0 auto",
+      minWidth: "300px",
+      padding: "10px"
+   }
+
     return (
+
       <MuiThemeProvider>
         <div>
           <AppBar
             title="DuckApp"
             iconElementLeft={
-               <img
-               src={Duck}
-               style={{
-                  width: "50px",
-                  display: "inline-block"
-                  }}
-               />}
+              <img
+              src={Duck}
+              style={{
+                width: "50px",
+                display: "inline-block"}}
+              />
+            }
           />
           <Tabs
             value={currentTab}
             onChange={this.onTabChange}>
             <Tab label="home" value="/home">
-              <Paper>
-                <Home />
-              </Paper>
+              <div className="paper">
+                <Paper style={paperStyle}>
+                  <Home />
+                </Paper>
+              </div>
             </Tab>
             <Tab label="report" value="/report">
-              <Paper>
+              <Paper style={paperStyle}>
                 <Report />
               </Paper>
             </Tab>
             <Tab label="list" value="/list">
-              <Paper>
+              <Paper style={paperStyle}>
                 <List />
               </Paper>
             </Tab>

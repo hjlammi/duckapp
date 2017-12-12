@@ -50,7 +50,7 @@ class Sighting extends Component {
 
     return (
       <div>
-        <Card>
+        <Card style={{margin: "20px"}}>
           <CardMedia
             overlay={<CardTitle
                       title={this.state.species}
