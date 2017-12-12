@@ -83,7 +83,8 @@ class Sightings extends Component {
               species={sighting.species}
               description={sighting.description}
               count={sighting.count}
-              dateTime={sighting.dateTime}/>
+              dateTime={sighting.dateTime}
+            />
           )}
         </ul>
       </div>

@@ -66,19 +66,17 @@ class App extends Component {
             value={currentTab}
             onChange={this.onTabChange}>
             <Tab label="home" value="/home">
-              <div>
-                <Paper style={paperStyle} className="paper">
-                  <Home />
-                </Paper>
-              </div>
+              <Paper style={paperStyle} className="paper">
+                <Home />
+              </Paper>
             </Tab>
             <Tab label="report" value="/report">
-              <Paper style={paperStyle}>
+              <Paper style={paperStyle} className="paper">
                 <Report />
               </Paper>
             </Tab>
             <Tab label="list" value="/list">
-              <Paper style={paperStyle}>
+              <Paper style={paperStyle} className="paper">
                 <List />
               </Paper>
             </Tab>

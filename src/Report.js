@@ -173,7 +173,7 @@ class Report extends Component {
     }
 
     return (
-      <div>
+      <div className="report">
         <h2>Report a duck sighting</h2>
         <p>
           Have you caught sight of a duck? We'd love to hear about it! Here you can report your sighting.

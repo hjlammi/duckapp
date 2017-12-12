@@ -40,3 +40,12 @@ p {
     width: 90%;
   }
 }
+
+@media screen and (min-width: 800px) {
+  .sightings,
+  .home,
+  .report {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
