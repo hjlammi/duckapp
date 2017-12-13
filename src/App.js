@@ -15,7 +15,10 @@ import List from './List';
 import Sightings from './Sightings';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Duck from './img/ducky.svg';
+import {fade} from 'material-ui/utils/colorManipulator';
+import { darkBlack, deepOrange600, teal400, teal300 } from 'material-ui/styles/colors';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -28,6 +31,19 @@ class App extends Component {
   }
 
   render() {
+
+    const muiTheme = getMuiTheme({
+      palette: {
+        primary1Color: teal300,
+        primary2Color: teal400,
+        primary3Color: teal400,
+        accent1Color: deepOrange600,
+        disabledColor: fade(darkBlack, 0.55),
+        pickerHeaderColor: teal400
+      }
+    });
+
+
     const pathnames = ["/home", "/report", "/list"];
 
     let currentTab;
@@ -49,7 +65,7 @@ class App extends Component {
 
     return (
 
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <div>
             <AppBar
