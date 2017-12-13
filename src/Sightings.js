@@ -72,6 +72,7 @@ class Sightings extends Component {
     fetch(address).then(response => {
       return response.json();
     }).then(sightings => {
+      Sightings.sortFromLatestToOldest(sightings);
       this.setState({
         sightings: sightings,
         value: 1
