@@ -1,24 +1,5 @@
-.App {
-  text-align: center;
-}
-
 .duckImg {
   animation: duckImg-swim infinite 3s linear;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
 }
 
 ul {
@@ -26,7 +7,7 @@ ul {
 }
 
 p {
-  margin: 0 0 15px;
+  margin: 0;
 }
 
 .link:hover {

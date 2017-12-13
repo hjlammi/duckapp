@@ -201,6 +201,7 @@ class Report extends Component {
             }).format}
             onChange={this.selectDate}
             value={this.state.date}
+            shouldDisableDate={(date) => date > new Date()}
           />
           <TimePicker
             format="24hr"

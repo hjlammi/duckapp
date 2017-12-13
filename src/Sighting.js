@@ -66,7 +66,7 @@ class Sighting extends Component {
           </CardMedia>
           <CardText>
             <Subheader style={subheaderStyle}>Description of the sighting:</Subheader>
-            <p>{this.state.description}</p>
+            <p style={{marginBottom: "15px"}}>{this.state.description}</p>
             <Subheader style={subheaderStyle}>Date and time of the sighting:</Subheader>
             <p>{moment(this.state.dateTime).format("Do MMM YYYY")} at {moment(this.state.dateTime).format("H:mm")}</p>
           </CardText>
