@@ -56,6 +56,17 @@ p {
   }
 }
 
+@media screen and (max-width: 600px) {
+  .cardTitle {
+    padding: 0 10px 5px !important;
+    line-height: 1em !important;
+  }
+
+  .cardTitle span {
+    line-height: 1em !important;
+  }
+}
+
 @media screen and (min-width: 800px) {
   .sightings,
   .home,
