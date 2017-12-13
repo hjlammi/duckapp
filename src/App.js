@@ -51,18 +51,21 @@ class App extends Component {
 
       <MuiThemeProvider>
         <div>
-          <AppBar
-            title="DuckApp"
-            iconElementLeft={
-              <img
-                className="duckImg"
-                src={Duck}
-                style={{
-                  width: "50px",
-                  display: "inline-block"}}
-              />
-            }
-          />
+          <div>
+            <AppBar
+              className="appBar"
+              title="DuckApp"
+              iconElementLeft={
+                <img
+                  className="duckImg"
+                  src={Duck}
+                  style={{
+                    width: "50px",
+                    display: "inline-block"}}
+                />
+              }
+            />
+          </div>
           <Tabs
             value={currentTab}
             onChange={this.onTabChange}>
