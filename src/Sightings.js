@@ -17,41 +17,53 @@ class Sightings extends Component {
   sortSightings = (event, index, value) => {
     let sightings = this.state.sightings;
     if (value === 3) {
-      sightings.sort((a, b) => {
-        const speciesA = a.species.toUpperCase();
-        const speciesB = b.species.toUpperCase();
-        if (speciesA < speciesB) {
-          return -1;
-        } else if (speciesA > speciesB) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+      Sightings.sortAlphabetically(sightings);
     } else if (value === 1) {
-      sightings.sort((a, b) => {
-        if (a.dateTime > b.dateTime) {
-          return -1;
-        } else if (a.dateTime < b.dateTime) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+      Sightings.sortFromLatestToOldest(sightings);
     } else if (value === 2) {
-      sightings.sort((a, b) => {
-        if (a.dateTime < b.dateTime) {
-          return -1;
-        } else if (a.dateTime > b.dateTime) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+      Sightings.sortFromOldestToLatest(sightings);
     }
     this.setState({
       value: value,
       sightings: sightings
+    });
+  }
+
+  static sortAlphabetically(sightings) {
+    sightings.sort((a, b) => {
+      const speciesA = a.species.toUpperCase();
+      const speciesB = b.species.toUpperCase();
+      if (speciesA < speciesB) {
+        return -1;
+      } else if (speciesA > speciesB) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  static sortFromLatestToOldest(sightings) {
+    sightings.sort((a, b) => {
+      if (a.dateTime > b.dateTime) {
+        return -1;
+      } else if (a.dateTime < b.dateTime) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  static sortFromOldestToLatest(sightings) {
+    sightings.sort((a, b) => {
+      if (a.dateTime < b.dateTime) {
+        return -1;
+      } else if (a.dateTime > b.dateTime) {
+        return 1;
+      } else {
+        return 0;
+      }
     });
   }
 
