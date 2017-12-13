@@ -5,7 +5,7 @@ import Gadwall from './img/gadwall.jpg'; // Image source: https://upload.wikimed
 import LesserScaup from './img/lesser_scaup.jpg'; // Image source: https://upload.wikimedia.org/wikipedia/commons/6/67/Lesser_Scaup_-_Aythya_affinis%2C_Oakley_Street%2C_Cambridge%2C_Maryland.jpg
 import Canvasback from './img/canvasback.jpg'; // Image source: https://upload.wikimedia.org/wikipedia/commons/6/6a/Canvasback_pair2.jpg
 import Mallard from './img/mallard.jpg'; // Image source: https://upload.wikimedia.org/wikipedia/commons/b/bf/Anas_platyrhynchos_male_female_quadrat.jpg
-import RubberDuck from './img/duck.png'; // Image source: https://pixabay.com/en/duck-duckling-toy-rubber-baby-146967/
+import RubberDuck from './img/ducky.svg'; // Image source: https://4vector.com/free-vector/ducky-clip-art-128090
 import Subheader from 'material-ui/Subheader';
 import moment from 'moment';
 

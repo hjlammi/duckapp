@@ -15,7 +15,7 @@ import List from './List';
 import Sightings from './Sightings';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Duck from './img/duck.png';
+import Duck from './img/ducky.svg';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -55,10 +55,11 @@ class App extends Component {
             title="DuckApp"
             iconElementLeft={
               <img
-              src={Duck}
-              style={{
-                width: "50px",
-                display: "inline-block"}}
+                className="duckImg"
+                src={Duck}
+                style={{
+                  width: "50px",
+                  display: "inline-block"}}
               />
             }
           />
