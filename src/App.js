@@ -1,11 +1,14 @@
-/* This is a web application for everyone who loves ducks!
-   Created by Heidi Lammi-Mihaljov (heidi.lammi@mihaljov.info) 22 November 2017.
-   Last modified 23.11.2017.
+/* This is a web application for everyone who loves ducks by Heidi Lammi-Mihaljov (heidi.lammi@mihaljov.info).
+  Last modified 4.1.2018.
+
+  The app was created using Create React App (https://github.com/facebookincubator/create-react-app).
+  It also utilizes Material-UI (http://www.material-ui.com) that provides React components implementing
+  Google's Material Design.
 */
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import React, { Component } from 'react';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import { Tabs, Tab } from 'material-ui/Tabs';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import { Redirect } from 'react-router-dom';
@@ -17,7 +20,7 @@ import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Duck from './img/ducky.svg';
-import {fade} from 'material-ui/utils/colorManipulator';
+import { fade } from 'material-ui/utils/colorManipulator';
 import { darkBlack, deepOrange600, teal400, teal300 } from 'material-ui/styles/colors';
 
 // Needed for onTouchTap
@@ -32,6 +35,7 @@ class App extends Component {
 
   render() {
 
+    // Modify the app's default colours.
     const muiTheme = getMuiTheme({
       palette: {
         primary1Color: teal300,
@@ -43,6 +47,12 @@ class App extends Component {
       }
     });
 
+    const paperStyle = {
+      maxWidth: "800px",
+      margin: "0 auto",
+      minWidth: "300px",
+      padding: "10px"
+    }
 
     const pathnames = ["/home", "/report", "/list"];
 
@@ -56,15 +66,7 @@ class App extends Component {
       )
     }
 
-    const paperStyle = {
-      maxWidth: "800px",
-      margin: "0 auto",
-      minWidth: "300px",
-      padding: "10px"
-   }
-
     return (
-
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <div>
@@ -73,6 +75,7 @@ class App extends Component {
               title="DuckApp"
               iconElementLeft={
                 <img
+                  alt=""
                   className="duckImg"
                   src={Duck}
                   style={{
