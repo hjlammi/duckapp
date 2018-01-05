@@ -12,7 +12,11 @@ class Home extends Component {
         <p>
           Welcome to the greatest duck sighting app ever!
         </p>
-        <p>Here you can <Link to="/report">report</Link> a duck sighting you made and <Link to="/list">browse a list</Link> of all the reported duck sightings.</p>
+        <h3 style={{marginBottom: "5px"}}>Here you can</h3>
+          <ul style={{marginTop: "5px", marginLeft: "10px"}}>
+            <li style={{marginBottom: "5px"}}><Link to="/report">report</Link> a duck sighting you made and</li>
+            <li><Link to="/list">browse a list</Link> of all the reported duck sightings.</li>
+          </ul>
       </div>
     );
   }
