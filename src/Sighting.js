@@ -57,7 +57,7 @@ class Sighting extends Component {
 
     return (
       <div>
-        <Card style={{marginBottom: "10px"}} className="card">
+        <Card style={{marginBottom: "10px", marginTop: "20px"}} className="card">
           <CardMedia
             overlay={<CardTitle
                       className="cardTitle"
