@@ -1,3 +1,5 @@
+/*The page component that will allow the user to report their own sighting.*/
+
 import React, { Component } from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -27,11 +29,14 @@ class Report extends Component {
     }
   }
 
+  /*The species that can be reported are fetched from the server and later mapped to be displayed
+  by a dropdown menu.*/
   componentDidMount() {
     const address = "http://localhost:8081/species";
     fetch(address).then(response => {
       return response.json();
     }).then(species => {
+      // Update the state with the list of available species.
       this.setState({
         species: species
       });
@@ -63,6 +68,7 @@ class Report extends Component {
     });
   }
 
+  // Check for erroneuous input from the user. The value must be at least 1 and only numbers are valid.
   checkCount = (event, count) => {
     if (count === "") {
       this.setState({
@@ -87,9 +93,11 @@ class Report extends Component {
     }
   }
 
+  // Sending a report to the server.
   handleSubmit = (event) => {
     event.preventDefault();
 
+    // Form dateTime property in ISO 8601 form from date and time properties.
     const date = this.state.date.toISOString().split('T')[0];
     const time = this.state.time.toISOString().split('T')[1];
     const dateTime = date + "T" + time;
@@ -109,6 +117,7 @@ class Report extends Component {
         'Content-Type': 'application/json'
       })
     }).then(res => {
+      // Depending on the respond status show either error or success dialog.
       if (res.status >= 400 && res.status < 600) {
         this.setState({
           errorOpen: true
@@ -137,6 +146,7 @@ class Report extends Component {
     });
   }
 
+  /*Fields are emptied when the dialog that informs about successful reporting is closed.*/
   closeSuccessDialog = () => {
     this.setState({
       successOpen: false,
@@ -151,6 +161,7 @@ class Report extends Component {
   render() {
     let DateTimeFormat = global.Intl.DateTimeFormat;
 
+    // Action buttons to be used by Alert dialog when report is send.
     const actions = [
       <FlatButton
         label="Cancel"
@@ -164,6 +175,7 @@ class Report extends Component {
       />
     ];
 
+    // Submit button is disabled if all the fields are not filled properly.
     let disabled;
     if (this.state.description === "" || this.state.speciesName === "" || this.state.date === null ||
     this.state.time === null || this.state.count === "") {
@@ -183,6 +195,7 @@ class Report extends Component {
             value={this.state.speciesIndex}
             onChange={this.selectSpecies}
           >
+            {/* Available species are mapped onto the MenuItems */}
             {this.state.species.map((sp, index) => {
               return (
                 <MenuItem
@@ -192,6 +205,8 @@ class Report extends Component {
               )
             })}
           </SelectField>
+          {/* Future dates disabled so that you cannot report a sighting that happens in the future, obviously.
+            Even if you did have a time machine! */}
           <DatePicker
             floatingLabelText="Date of the sighting:"
             formatDate={new DateTimeFormat('en-GB', {
@@ -226,6 +241,7 @@ class Report extends Component {
             primary={true}
             onClick={this.openDialog}
             disabled={disabled} />
+          {/* Dialog to confirm that the user really wants to send the data. */}
           <Dialog
             title="Alert"
             actions={actions}
@@ -234,6 +250,7 @@ class Report extends Component {
           >
             Are you sure you want to send data?
           </Dialog>
+          {/* Dialog to tell the user of an error in sending the data. */}
           <Dialog
             title="Something went wrong!"
             actions={
@@ -248,6 +265,7 @@ class Report extends Component {
           >
             Unfortunately something went wrong and the data was not sent
           </Dialog>
+          {/* Dialog to tell the user that the data was successfully sent. */}
           <Dialog
             title="Success!"
             actions={

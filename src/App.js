@@ -54,6 +54,7 @@ class App extends Component {
       padding: "10px"
     }
 
+    // List of possible pathnames.
     const pathnames = ["/home", "/report", "/list"];
 
     let currentTab;

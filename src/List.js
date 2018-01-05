@@ -1,3 +1,5 @@
+/*This page component will allow the user see a list of reported sightings.*/
+
 import React, { Component } from 'react';
 import Sightings from './Sightings';
 import ActionHome from 'material-ui/svg-icons/action/home';

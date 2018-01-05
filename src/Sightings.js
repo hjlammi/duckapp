@@ -1,3 +1,5 @@
+// Component representing all the duck sigtings.
+
 import React, { Component } from 'react';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -14,6 +16,7 @@ class Sightings extends Component {
     }
   }
 
+  // Sightings can be sorted either alphabetically, from latest to oldest or from oldest to latest sighting.
   sortSightings = (event, index, value) => {
     let sightings = this.state.sightings;
     if (value === 3) {
@@ -67,6 +70,7 @@ class Sightings extends Component {
     });
   }
 
+  // When component first mounts the sightings are listed from latest to the oldest.
   componentDidMount() {
     const address = "http://localhost:8081/sightings";
     fetch(address).then(response => {

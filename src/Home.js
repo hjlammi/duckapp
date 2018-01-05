@@ -1,4 +1,7 @@
+/*The welcome page component that is rendered initially.*/
+
 import React, { Component } from 'react';
+// Let's me navigate inside my app.
 import { Link } from 'react-router-dom';
 
 class Home extends Component {
