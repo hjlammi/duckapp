@@ -32,7 +32,7 @@ class Report extends Component {
   /*The species that can be reported are fetched from the server and later mapped to be displayed
   by a dropdown menu.*/
   componentDidMount() {
-    const address = "http://localhost:8081/species";
+    const address = "https://sheltered-savannah-26037.herokuapp.com/species";
     fetch(address).then(response => {
       return response.json();
     }).then(species => {
@@ -109,7 +109,7 @@ class Report extends Component {
       count: this.state.count
     };
 
-    const address = "http://localhost:8081/sightings";
+    const address = "https://sheltered-savannah-26037.herokuapp.com/sightings";
     fetch(address, {
       method: 'POST',
       body: JSON.stringify(requestBody),

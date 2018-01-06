@@ -72,7 +72,7 @@ class Sightings extends Component {
 
   // When component first mounts the sightings are listed from latest to the oldest.
   componentDidMount() {
-    const address = "http://localhost:8081/sightings";
+    const address = "https://sheltered-savannah-26037.herokuapp.com/sightings";
     fetch(address).then(response => {
       return response.json();
     }).then(sightings => {
