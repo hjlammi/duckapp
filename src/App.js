@@ -79,12 +79,8 @@ class App extends Component {
       padding: "10px"
     }
 
-    const basePath = "/~hl424546/duckapp";
-    const homePath = basePath + "/home";
-    const reportPath = basePath + "/report";
-    const listPath = basePath + "/list";
     // List of possible pathnames.
-    const pathnames = [homePath, reportPath, listPath];
+    const pathnames = ["/home", "/report", "/list"];
 
     let currentTab;
 
@@ -92,7 +88,7 @@ class App extends Component {
       currentTab = this.props.location.pathname;
     } else {
       return (
-        <Redirect to={homePath} />
+        <Redirect to="/home" />
       )
     }
 
@@ -118,17 +114,17 @@ class App extends Component {
           <Tabs
             value={currentTab}
             onChange={this.onTabChange}>
-            <Tab label="home" value={homePath}>
+            <Tab label="home" value="/home">
               <Paper style={paperStyle} className="paper">
                 <Home />
               </Paper>
             </Tab>
-            <Tab label="report" value={reportPath}>
+            <Tab label="report" value="/report">
               <Paper style={paperStyle} className="paper">
                 <Report callbackParent={this.updateSightings}/>
               </Paper>
             </Tab>
-            <Tab label="list" value={listPath}>
+            <Tab label="list" value="/list">
               <Paper style={paperStyle} className="paper">
                 <List sightings={this.state.sightings}/>
               </Paper>

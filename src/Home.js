@@ -7,10 +7,6 @@ import { Link } from 'react-router-dom';
 class Home extends Component {
   render() {
 
-    const basePath = "/~hl424546/duckapp";
-    const reportPath = basePath + "/report";
-    const listPath = basePath + "/list";
-
     return (
       <div className="home">
         <h2>What's up, duck!</h2>
@@ -19,8 +15,8 @@ class Home extends Component {
         </p>
         <h3 style={{marginBottom: "5px"}}>Here you can</h3>
           <ul style={{marginTop: "5px", marginLeft: "10px"}}>
-            <li style={{marginBottom: "5px"}}><Link to={reportPath}>report</Link> a duck sighting you made and</li>
-            <li><Link to={listPath}>browse a list</Link> of all the reported duck sightings.</li>
+            <li style={{marginBottom: "5px"}}><Link to="/report">report</Link> a duck sighting you made and</li>
+            <li><Link to="/list">browse a list</Link> of all the reported duck sightings.</li>
           </ul>
       </div>
     );

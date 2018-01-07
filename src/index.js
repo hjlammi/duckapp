@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, withRouter } from 'react-router-dom';
+import { HashRouter, withRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
@@ -10,8 +10,8 @@ import registerServiceWorker from './registerServiceWorker';
 const AppWithRouter = withRouter(App);
 
 ReactDOM.render(
-  <BrowserRouter>
+  <HashRouter>
     <AppWithRouter />
-  </BrowserRouter>,
+  </HashRouter>,
   document.getElementById('root'));
 registerServiceWorker();
