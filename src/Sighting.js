@@ -1,7 +1,7 @@
 // Component for a single duck sighting.
 
 import React, { Component } from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import Redhead from './img/redhead.jpg'; // Image source: https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Redhead_-_Aythya_americana%2C_Oakley_Street%2C_Cambridge%2C_Maryland.jpg/1280px-Redhead_-_Aythya_americana%2C_Oakley_Street%2C_Cambridge%2C_Maryland.jpg
 import Gadwall from './img/gadwall.jpg'; // Image source: https://upload.wikimedia.org/wikipedia/commons/d/d0/Gadwall_pair_RWD.jpg
 import LesserScaup from './img/lesser_scaup.jpg'; // Image source: https://upload.wikimedia.org/wikipedia/commons/6/67/Lesser_Scaup_-_Aythya_affinis%2C_Oakley_Street%2C_Cambridge%2C_Maryland.jpg

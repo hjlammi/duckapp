@@ -15,7 +15,6 @@ import { Redirect } from 'react-router-dom';
 import Home from './Home';
 import Report from './Report';
 import List from './List';
-import Sightings from './Sightings';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
