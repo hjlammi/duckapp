@@ -1,5 +1,5 @@
 /* This is a web application for everyone who loves ducks by Heidi Lammi-Mihaljov (heidi.lammi@mihaljov.info).
-  Last modified 4.1.2018.
+  Last modified 7.1.2018.
 
   The app was created using Create React App (https://github.com/facebookincubator/create-react-app).
   It also utilizes Material-UI (http://www.material-ui.com) that provides React components implementing
@@ -35,22 +35,19 @@ class App extends Component {
     }
   }
 
-  onTabChange = (value) => {
-    this.props.history.push(value);
+  onTabChange = (path) => {
+    this.props.history.push(path);
   }
 
   updateSightings = () => {
-    const address = "https://sheltered-savannah-26037.herokuapp.com/sightings";
-    fetch(address).then(response => {
-      return response.json();
-    }).then(sightings => {
-      this.setState({
-        sightings: sightings
-      });
-    });
+    this.fetchDataFromServer();
   }
 
   componentDidMount() {
+    this.fetchDataFromServer();
+  }
+
+  fetchDataFromServer = () => {
     const address = "https://sheltered-savannah-26037.herokuapp.com/sightings";
     fetch(address).then(response => {
       return response.json();
@@ -82,8 +79,12 @@ class App extends Component {
       padding: "10px"
     }
 
+    const basePath = "/~hl424546/duckapp";
+    const homePath = basePath + "/home";
+    const reportPath = basePath + "/report";
+    const listPath = basePath + "/list";
     // List of possible pathnames.
-    const pathnames = ["/home", "/report", "/list"];
+    const pathnames = [homePath, reportPath, listPath];
 
     let currentTab;
 
@@ -91,7 +92,7 @@ class App extends Component {
       currentTab = this.props.location.pathname;
     } else {
       return (
-        <Redirect to="/home" />
+        <Redirect to={homePath} />
       )
     }
 
@@ -117,17 +118,17 @@ class App extends Component {
           <Tabs
             value={currentTab}
             onChange={this.onTabChange}>
-            <Tab label="home" value="/home">
+            <Tab label="home" value={homePath}>
               <Paper style={paperStyle} className="paper">
                 <Home />
               </Paper>
             </Tab>
-            <Tab label="report" value="/report">
+            <Tab label="report" value={reportPath}>
               <Paper style={paperStyle} className="paper">
                 <Report callbackParent={this.updateSightings}/>
               </Paper>
             </Tab>
-            <Tab label="list" value="/list">
+            <Tab label="list" value={listPath}>
               <Paper style={paperStyle} className="paper">
                 <List sightings={this.state.sightings}/>
               </Paper>
