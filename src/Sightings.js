@@ -11,24 +11,13 @@ class Sightings extends Component {
     super();
 
     this.state = {
-      sightings: [],
-      value: 0
+      sortOrder: 1
     }
   }
 
-  // Sightings can be sorted either alphabetically, from latest to oldest or from oldest to latest sighting.
-  sortSightings = (event, index, value) => {
-    let sightings = this.state.sightings;
-    if (value === 3) {
-      Sightings.sortAlphabetically(sightings);
-    } else if (value === 1) {
-      Sightings.sortFromLatestToOldest(sightings);
-    } else if (value === 2) {
-      Sightings.sortFromOldestToLatest(sightings);
-    }
+  handleOrderChange = (event, index, value) => {
     this.setState({
-      value: value,
-      sightings: sightings
+      sortOrder: value
     });
   }
 
@@ -70,33 +59,31 @@ class Sightings extends Component {
     });
   }
 
-  // When component first mounts the sightings are listed from latest to the oldest.
-  componentDidMount() {
-    const address = "https://sheltered-savannah-26037.herokuapp.com/sightings";
-    fetch(address).then(response => {
-      return response.json();
-    }).then(sightings => {
-      Sightings.sortFromLatestToOldest(sightings);
-      this.setState({
-        sightings: sightings,
-        value: 1
-      });
-    });
-  }
-
   render() {
+    const sightings = this.props.sightings;
+    // Let's make a clone of the sightings array to avoid modifying the original sightings in the App component.
+    const sightingsClone = sightings.slice(0);
+    // Sightings can be ordered either alphabetically, from latest to the oldest or from oldest to the latest sightings.
+    if (this.state.sortOrder === 3) {
+      Sightings.sortAlphabetically(sightingsClone);
+    } else if (this.state.sortOrder === 1) {
+      Sightings.sortFromLatestToOldest(sightingsClone);
+    } else if (this.state.sortOrder === 2) {
+      Sightings.sortFromOldestToLatest(sightingsClone);
+    }
+
     return (
       <div>
         <div>
           <Subheader style={{lineHeight: "1em", paddingTop: "15px"}}>List sightings:</Subheader>
-          <DropDownMenu value={this.state.value} onChange={this.sortSightings}>
+          <DropDownMenu value={this.state.sortOrder} onChange={this.handleOrderChange}>
             <MenuItem value={1} primaryText="latest sighting first"/>
             <MenuItem value={2} primaryText="oldest sighting first"/>
             <MenuItem value={3} primaryText="in alphabetical order"/>
           </DropDownMenu>
         </div>
         <ul>
-          {this.state.sightings.map(sighting =>
+          {sightingsClone.map(sighting =>
             <Sighting
               key={sighting.id}
               species={sighting.species}

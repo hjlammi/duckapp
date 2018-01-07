@@ -28,9 +28,38 @@ import { darkBlack, deepOrange600, teal400, teal300 } from 'material-ui/styles/c
 injectTapEventPlugin();
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sightings: []
+    }
+  }
 
   onTabChange = (value) => {
     this.props.history.push(value);
+  }
+
+  updateSightings = () => {
+    const address = "https://sheltered-savannah-26037.herokuapp.com/sightings";
+    fetch(address).then(response => {
+      return response.json();
+    }).then(sightings => {
+      this.setState({
+        sightings: sightings
+      });
+    });
+  }
+
+  componentDidMount() {
+    const address = "https://sheltered-savannah-26037.herokuapp.com/sightings";
+    fetch(address).then(response => {
+      return response.json();
+    }).then(sightings => {
+      this.setState({
+        sightings: sightings
+      });
+    });
   }
 
   render() {
@@ -96,12 +125,12 @@ class App extends Component {
             </Tab>
             <Tab label="report" value="/report">
               <Paper style={paperStyle} className="paper">
-                <Report />
+                <Report callbackParent={this.updateSightings}/>
               </Paper>
             </Tab>
             <Tab label="list" value="/list">
               <Paper style={paperStyle} className="paper">
-                <List />
+                <List sightings={this.state.sightings}/>
               </Paper>
             </Tab>
           </Tabs>

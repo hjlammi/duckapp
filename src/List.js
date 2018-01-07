@@ -16,7 +16,7 @@ class List extends Component {
         <p>
           Here you can see a list of all the reported duck sightings.
         </p>
-        <Sightings />
+        <Sightings sightings={this.props.sightings}/>
         <div onClick={this.navigateToTop} style={{textAlign: "center"}} className="link">
           <ActionHome/>
           <p>Navigate to top</p>

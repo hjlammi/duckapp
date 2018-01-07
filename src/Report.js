@@ -43,6 +43,7 @@ class Report extends Component {
     });
   }
 
+
   selectSpecies = (event, index, speciesIndex) => {
     this.setState({
       speciesIndex: index,
@@ -93,6 +94,10 @@ class Report extends Component {
     }
   }
 
+  handleDataSent = (event) => {
+    this.props.callbackParent(event);
+  }
+
   // Sending a report to the server.
   handleSubmit = (event) => {
     event.preventDefault();
@@ -123,6 +128,7 @@ class Report extends Component {
           errorOpen: true
         });
       } else {
+        this.handleDataSent();
         this.setState({
           successOpen: true
         });
